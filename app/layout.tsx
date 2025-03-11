@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import MobileNav from "@/components/MobileNav";
 import ComNav from "@/components/ComNav";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased px-8 py-4`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased px-8 py-4 w-full h-screen flex flex-col justify-between`}
       >
         <div className="absolute top-0 left-0 w-full h-[300px] overflow-hidden -z-10">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -52,6 +53,7 @@ export default function RootLayout({
         <ComNav />
         <MobileNav />
         {children}
+        <Footer />
       </body>
     </html>
   );

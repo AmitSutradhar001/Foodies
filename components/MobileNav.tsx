@@ -38,7 +38,9 @@ export default function MobileNav() {
               }`}
             ></div>
           </button>
-          <Image src={LogoImg} className="h-16 w-16" alt="Logo" priority />
+          <Link href={"/"}>
+            <Image src={LogoImg} className="h-16 w-16" alt="Logo" priority />
+          </Link>
         </div>
 
         {/* Mobile Menu with Smooth Open/Close Animation */}
@@ -48,15 +50,6 @@ export default function MobileNav() {
           }`}
         >
           <ul className="text-black">
-            <li>
-              <Link
-                onClick={() => setIsOpen(!isOpen)}
-                href="/"
-                className="block px-4 py-2 hover:bg-gray-100"
-              >
-                Home
-              </Link>
-            </li>
             <li>
               <Link
                 onClick={() => setIsOpen(!isOpen)}

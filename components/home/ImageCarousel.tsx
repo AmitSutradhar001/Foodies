@@ -52,7 +52,7 @@ export default function ImageCarousel() {
 
   return (
     <>
-      <div className="h-96 w-96 rounded-2xl">
+      <div className=" rounded-2xl">
         <Image
           src={images[img].image}
           alt={images[img].alt}

@@ -1,7 +1,8 @@
 "use server";
 import { getDb } from "@/lib/mongodb";
 import cloudinary from "@/lib/cloudinary";
-import { log } from "console";
+import { revalidatePath } from "next/cache";
+import { ObjectId } from "mongodb";
 
 export async function mealsShare(
   previousstate: { success: boolean; message: string },
@@ -38,10 +39,62 @@ export async function mealsShare(
       imageUrl: uploadResponse.secure_url,
       createdAt: new Date(),
     });
-
+    revalidatePath("/meals", "page"); // default page but we can also ad "layout"
     return { success: true, message: "Recipe shared successfully!" };
   } catch (error) {
     console.error(error);
     return { success: false, message: "Something went wrong" };
+  }
+}
+
+// get all meals
+export async function getAllMeals() {
+  try {
+    const db = await getDb();
+    const recipes = db.collection("recipes");
+
+    // Fetch all meals and convert MongoDB _id to string
+    const meals = await recipes.find().toArray();
+
+    // Define required fields and map only valid meals
+    const validMeals = meals.map((meal) => ({
+      _id: meal._id?.toString() || "",
+      username: meal.username || "",
+      email: meal.email || "",
+      title: meal.title || "",
+      instructions: meal.instructions || "",
+      imageUrl: meal.imageUrl || "",
+      createdAt: meal.createdAt || new Date().toISOString(),
+    }));
+
+    return validMeals;
+  } catch (error) {
+    console.error("Error fetching meals:", error);
+    return [];
+  }
+}
+export async function getMealById(id: string) {
+  try {
+    const db = await getDb();
+    const recipes = db.collection("recipes");
+
+    // Convert string ID to ObjectId and find the meal
+    const meal = await recipes.findOne({ _id: new ObjectId(id) });
+
+    if (!meal) return null;
+
+    // Return only specific fields
+    return {
+      _id: meal._id?.toString() || "",
+      username: meal.username || "",
+      email: meal.email || "",
+      title: meal.title || "",
+      instructions: meal.instructions || "",
+      imageUrl: meal.imageUrl || "",
+      createdAt: meal.createdAt || new Date().toISOString(),
+    };
+  } catch (error) {
+    console.error("Error fetching meal by ID:", error);
+    return null;
   }
 }

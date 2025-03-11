@@ -1,6 +1,7 @@
 "use client";
 
 import { mealsShare } from "@/lib/actions";
+import { redirect } from "next/navigation";
 import { useActionState, useEffect, useState, ChangeEvent } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,6 +30,9 @@ export default function Share() {
     if (state.success && state.message.length > 0) {
       setImagePreview(null);
       toast.success(state.message);
+      setTimeout(() => {
+        redirect("/meals");
+      }, 1000);
     } else if (!state.success && state.message.length > 0) {
       setImagePreview(null);
       toast.error(state.message);
@@ -190,7 +194,7 @@ export default function Share() {
                       <svg
                         stroke="white"
                         fill="white"
-                        stroke-width="0"
+                        strokeWidth="0"
                         viewBox="0 0 24 24"
                         className="animate-spin"
                         height={20}

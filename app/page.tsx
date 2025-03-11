@@ -3,8 +3,8 @@ import ImageCarousel from "@/components/home/ImageCarousel";
 export default function Home() {
   return (
     <>
-      <div className="w-full mt-24 flex justify-center items-center">
-        <div className="flex justify-around items-center w-3/4 gap-4 flex-col md:flex-row ">
+      <div className="w-full lg:mt-24 flex justify-center items-center">
+        <div className="flex justify-center lg:justify-around items-center w-full lg:w-3/4 gap-4 flex-col lg:flex-row ">
           <div className="w-1/2 ">
             <ImageCarousel />
           </div>
@@ -32,7 +32,6 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div></div>
         </div>
       </div>
     </>
