@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import CloudinaryImg from "./CloudinaryImg";
 
 interface SingleMealProps {
   _id: string;
@@ -18,7 +17,9 @@ export default function ImgCard(meal: SingleMealProps) {
         href={`/meals/${meal._id}`}
         className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl mt-10 hover:cursor-pointer p-4"
       >
-        <CloudinaryImg src={meal.imageUrl} width={200} height={200} />
+        <div className="w-96 h-96">
+          <Image src={meal.imageUrl} alt={meal.title} fill />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-blue-500/30 "></div>
         <h3 className="z-10 overflow-hidden text-3xl font-semibold text-white">
           {meal.title}

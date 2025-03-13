@@ -1,15 +1,11 @@
 "use client";
 
 import { mealsShare } from "@/lib/actions";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useActionState, useEffect, useState, ChangeEvent } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-interface fileP {
-  name: string;
-  label: string;
-}
 
 export default function Share() {
   const [state, formAction, isPending] = useActionState(mealsShare, {
@@ -24,6 +20,7 @@ export default function Share() {
     if (file && file.type.startsWith("image/")) {
       const imageUrl = URL.createObjectURL(file);
       setImagePreview(imageUrl);
+      return () => URL.revokeObjectURL(imageUrl);
     }
   };
   useEffect(() => {
@@ -161,9 +158,11 @@ export default function Share() {
             {/* Image Preview or Question Mark Icon */}
             <div className="flex justify-center items-center rounded-md border border-indigo-500 bg-gray-50 shadow-md w-28 h-28">
               {imagePreview ? (
-                <img
+                <Image
                   src={imagePreview}
                   alt="Uploaded"
+                  width={112}
+                  height={112}
                   className="w-full h-full object-cover rounded-md"
                 />
               ) : (

@@ -1,19 +1,20 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NotFound() {
   return (
     <div className="flex items-center justify-center ">
       <div className="text-center animate-fadeIn">
-        <img
+        <Image
           src="https://yemca-services.net/404.png"
           alt="404 Illustration"
           className="mx-auto w-80 animate-[float_3s_infinite] shadow-xl rounded-lg"
         />
         <h1 className="text-7xl font-extrabold text-blue-700/70 mt-6">
-          Looks Like You're Lost!
+          Looks Like You&apos;re Lost!
         </h1>
         <p className="text-xl text-gray-700 mt-2">
-          We can't seem to find the page you're looking for.
+          We can&apos;t seem to find the page you&apos;re looking for.
         </p>
         <Link
           href="/"

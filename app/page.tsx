@@ -1,4 +1,5 @@
 import ImageCarousel from "@/components/home/ImageCarousel";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -27,9 +28,12 @@ export default function Home() {
                 Join the Community
               </p>
 
-              <button className="text-center bg-gradient-to-r from-orange-600/70 via-orange-400 to-yellow-300 text-white font-bold cursor-pointer px-7 py-3 rounded-md animate-[scaleToggle_2s_ease-in-out_infinite]">
+              <Link
+                href={"/community"}
+                className="text-center bg-gradient-to-r from-orange-600/70 via-orange-400 to-yellow-300 text-white font-bold cursor-pointer px-7 py-3 rounded-md animate-[scaleToggle_2s_ease-in-out_infinite]"
+              >
                 Explore Meals
-              </button>
+              </Link>
             </div>
           </div>
         </div>

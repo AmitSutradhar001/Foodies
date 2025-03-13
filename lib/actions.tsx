@@ -2,7 +2,6 @@
 import { getDb } from "@/lib/mongodb";
 import cloudinary from "@/lib/cloudinary";
 import { revalidatePath } from "next/cache";
-import { ObjectId } from "mongodb";
 
 export async function mealsShare(
   previousstate: { success: boolean; message: string },
@@ -39,7 +38,7 @@ export async function mealsShare(
       imageUrl: uploadResponse.secure_url,
       createdAt: new Date(),
     });
-    revalidatePath("/meals", "page"); // default page but we can also ad "layout"
+    revalidatePath("/meals");
     return { success: true, message: "Recipe shared successfully!" };
   } catch (error) {
     console.error(error);
@@ -71,30 +70,5 @@ export async function getAllMeals() {
   } catch (error) {
     console.error("Error fetching meals:", error);
     return [];
-  }
-}
-export async function getMealById(id: string) {
-  try {
-    const db = await getDb();
-    const recipes = db.collection("recipes");
-
-    // Convert string ID to ObjectId and find the meal
-    const meal = await recipes.findOne({ _id: new ObjectId(id) });
-
-    if (!meal) return null;
-
-    // Return only specific fields
-    return {
-      _id: meal._id?.toString() || "",
-      username: meal.username || "",
-      email: meal.email || "",
-      title: meal.title || "",
-      instructions: meal.instructions || "",
-      imageUrl: meal.imageUrl || "",
-      createdAt: meal.createdAt || new Date().toISOString(),
-    };
-  } catch (error) {
-    console.error("Error fetching meal by ID:", error);
-    return null;
   }
 }

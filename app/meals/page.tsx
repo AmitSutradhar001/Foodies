@@ -4,15 +4,6 @@ import { getAllMeals } from "@/lib/actions";
 import { Suspense } from "react";
 import Loading from "../loading";
 
-interface SingleMealProps {
-  _id: string;
-  username?: string;
-  email?: string;
-  title: string;
-  instructions?: string;
-  imageUrl: string;
-}
-
 export default async function Meals() {
   return (
     <>

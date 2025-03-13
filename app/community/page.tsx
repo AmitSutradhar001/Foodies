@@ -1,9 +1,7 @@
 import Image from "next/image";
-
 import mealIcon from "@/public/icons/meal.png";
 import communityIcon from "@/public/icons/community.png";
 import eventsIcon from "@/public/icons/events.png";
-// import classes from "./page.module.css";
 
 export default function CommunityPage() {
   return (

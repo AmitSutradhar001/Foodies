@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <>
@@ -6,10 +8,12 @@ export default function Footer() {
           href="#"
           className="flex items-center justify-center mb-5 text-2xl font-semibold text-gray-900"
         >
-          <img
+          <Image
             src="https://www.svgrepo.com/show/499962/music.svg"
             className="h-12 mr-3 sm:h-9"
             alt="Landwind Logo"
+            width={25}
+            height={25}
           />
           Foodies
         </a>
